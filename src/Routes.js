@@ -13,15 +13,15 @@ class Routes extends Component {
   render() {
     return (
       <Router>
+        <Nav />
         <Switch>
-          <Nav />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/" component={Main} />
           <Route exact path="/product" component={ProductDetail} />
           <Route exact path="/product-list" component={ProductList} />
-          <Footer />
         </Switch>
+        <Footer />
       </Router>
     );
   }
