@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "imgSrc": "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?iidMnwxMjA3fDB8MHxzZWFyY2h8MTF8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "서핑OPEN"
+  },
+  {
+    "id": 2,
+    "imgSrc": "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?iidMnwxMjA3fDB8MHxzZWFyY2h8MTB8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "실내다이빙"
+  },
+  {
+    "id": 3,
+    "imgSrc": "https://images.unsplash.com/photo-1612810806695-30f7a8258391?iidMnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "등산트래킹"
+  },
+  {
+    "id": 4,
+    "imgSrc": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?iidMnwxMjA3fDB8MHxzZWFyY2h8Nnx8aWNvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "제주여행"
+  },
+  {
+    "id": 5,
+    "imgSrc": "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?iidMnwxMjA3fDB8MHxzZWFyY2h8MTV8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "공예DIY"
+  },
+  {
+    "id": 6,
+    "imgSrc": "https://images.unsplash.com/photo-1614680376739-414d95ff43df?iidMnwxMjA3fDB8MHxzZWFyY2h8MjF8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "베이킹"
+  },
+  {
+    "id": 7,
+    "imgSrc": "https://images.unsplash.com/photo-1600480505021-e9cfb05527f1?iidMnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGljb258ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "product_name": "미술드로잉"
+  }
+]
