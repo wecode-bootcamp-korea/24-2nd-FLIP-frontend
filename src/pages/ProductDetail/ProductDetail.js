@@ -6,23 +6,24 @@ import ProductHeadSection from './ProductHeadSection';
 import ProductNotiSection from './ProductNotiSection';
 import ProductRecommandSection from './ProductRecommandSection';
 import ProductReviewSection from './ProductReviewSection';
+import { useParams } from 'react-router';
 
 const ProductDetail = () => {
+  const params = useParams();
   const [product, setProduct] = useState({});
   const [review, setReview] = useState({});
   const [location, setLocation] = useState({});
 
   useEffect(() => {
-    // console.log('componentDidMount');
-    fetch(`http://10.58.7.68:8000/product/1`)
+    fetch(`http://10.58.7.68:8000/product/${params.id}`)
       .then(result => result.json())
       .then(product => setProduct(product.result));
 
-    fetch(`http://10.58.7.68:8000/product/1/review`)
+    fetch(`http://10.58.7.68:8000/product/${params.id}/review`)
       .then(result => result.json())
       .then(data => setReview(data.result));
 
-    fetch(`http://10.58.7.68:8000/product/1/location`)
+    fetch(`http://10.58.7.68:8000/product/${params.id}/location`)
       .then(result => result.json())
       .then(location => setLocation(location.result));
   }, []);

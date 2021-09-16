@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import DetailStarImg from './DetailStarImg';
 import DetailExplanation from './DetailExplanation';
 
 export default function DetailCardContent({ card }) {
-  const [bookMark, setBookmark] = useState(false);
-
   return (
     <Wrapper>
       <ImgContainer>
-        <IconWrapper>
-          {/* <Bookmark onClick={() => setBookmark(!bookMark)}>
-            <i class={`${bookMark ? 'fas' : 'far'} fa-bookmark`} />
-          </Bookmark> */}
-        </IconWrapper>
         <ProductImg src={card.image_url[0]} />
       </ImgContainer>
 
@@ -73,19 +66,4 @@ const Price = styled.div`
 const RatingSection = styled.div`
   display: flex;
   margin-top: 12px;
-`;
-
-const Bookmark = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 167px;
-  height: 18px;
-  margin-top: 3px;
-  cursor: pointer;
-`;
-
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
 `;

@@ -11,7 +11,6 @@ function DetailCard() {
       .then(res => res.json())
       .then(res => setCard(res.MESSAGE.slice(0, 4)));
   }, []);
-  // console.log(cards);
 
   return (
     <Container>
