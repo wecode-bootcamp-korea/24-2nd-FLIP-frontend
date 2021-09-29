@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Explanation() {
+function ProductExplanation() {
   return (
     <Ex>
       <span>온라인 | Zone으로 만나요!</span>
@@ -18,4 +18,4 @@ const Ex = styled.div`
   text-overflow: hidden;
 `;
 
-export default Explanation;
+export default ProductExplanation;
