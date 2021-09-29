@@ -38,6 +38,7 @@ export default function Card({ card }) {
 const Wrapper = styled.div`
   width: 180px;
   margin-right: 15px;
+  margin-bottom: 20px;
 `;
 
 const ImgContainer = styled.div`
