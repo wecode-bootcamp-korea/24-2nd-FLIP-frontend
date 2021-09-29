@@ -23,7 +23,8 @@ function Card() {
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  width: 800px;
 `;
 
 export default Card;
