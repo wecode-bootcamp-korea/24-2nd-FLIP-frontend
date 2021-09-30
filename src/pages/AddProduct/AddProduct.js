@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Select from 'react-select';
 import Postcode from './Postcode';
+import { API } from '../../config';
 
 const AddProduct = () => {
   const [addAddress, setAddAddress] = useState('');
   const [productInfo, setProductInfo] = useState({
-    title: 'dd',
-    price: '100',
-    sale_percent: '2',
-    sub_category: '등산',
-    description: '등산하자자자자',
-    playing_location: '서울특별시 강원도',
+    title: '서핑가자',
+    price: 1000,
+    sale_percent: 10,
+    sub_category: '서핑',
+    description: '위서핑',
+    playing_location: '서울시 강남구 테헤란로 427 (삼성동, 위워크타워)',
+    gather_location: '서울시 강남구 테헤란로 427 (삼성동, 위워크타워)',
   });
 
   const handleInput = e => {
@@ -44,21 +47,12 @@ const AddProduct = () => {
   };
 
   const handleClick = () => {
-    fetch('http://10.58.7.108:8080/products/host/1', {
+    fetch(`${API}/products/host/1`, {
       method: 'POST',
-      // headers: {
-      // Authorization:
-      //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0._fleYhEIx5512GwejJ70cid7blXOsKEmcbf5zeHBHtA',
-      // },
-      body: JSON.stringify({
-        title: 'dd',
-        price: '100',
-        sale_percent: '2',
-        sub_category: '등산',
-        description: '등산하자자자자',
-        playing_location: '서울특별시 강원도',
-        gather_location: '서울특별시 강원도',
-      }),
+      headers: {
+        Authorization: localStorage.getItem('kakao-token'),
+      },
+      body: JSON.stringify(productInfo),
     }).then(response => response.json());
   };
 
@@ -94,16 +88,7 @@ const AddProduct = () => {
           <input onChange={handleInput} name="sale_percent" type="text"></input>
         </Line>
         <Line>
-          이미지
-          <div>
-            <input
-              type="file"
-              accept="image/jpg,impge/png,image/jpeg,image/gif"
-              name="image_url"
-              multiple
-              onChange={handleImg}
-            ></input>
-          </div>
+          <Link to="/img">이미지 업로드</Link>
         </Line>
         <Line>
           진행장소

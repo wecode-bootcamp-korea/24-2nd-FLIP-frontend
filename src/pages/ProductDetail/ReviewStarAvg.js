@@ -2,29 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ReviewStarAvg = ({ review }) => {
+  console.log(review);
   return (
     <Container>
       <BackgroundStar>
         <GrayStar>
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </GrayStar>
         <GrayStar>
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </GrayStar>
         <GrayStar>
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </GrayStar>
         <GrayStar>
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </GrayStar>
         <GrayStar>
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </GrayStar>
       </BackgroundStar>
       <ColorStar>
-        {[...Array(review)].map((star, idx) => (
+        {[...Array(review && Math.floor(review))].map((star, idx) => (
           <RedStar key={idx}>
-            <i class="fas fa-star"></i>
+            <i className="fas fa-star"></i>
           </RedStar>
         ))}
       </ColorStar>

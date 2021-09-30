@@ -34,7 +34,7 @@ const ProductReviewSection = ({ review }) => {
         <>
           <ReviewSummary>
             <div>
-              <ReviewStarAvg review={review.avg && Number(review.avg)} />
+              <ReviewStarAvg review={review && review.avg} />
               <div className="starInfo">
                 <span>{review && Math.floor(Number(review.avg))}</span>
                 <span className="span">•</span>

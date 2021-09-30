@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from './Modal';
 import ProductListCard from './ProductCard';
 
 export default function ProductList() {
+  const params = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [subcategory, setSubCategory] = useState([]);
   const [sortState, setSortState] = useState('price');
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
 
+  //제품들 받아 오는 거
   useEffect(() => {
     console.log('productlist ', sortState);
-    fetch(`http://10.58.1.56:8000/products/list/1?order=${sortState} `)
+    fetch(
+      `http://3.37.182.60:8000/products/list/${params.listid}?order=${sortState} `
+    )
       .then(res => res.json())
       .then(res => {
         setProducts(res.MESSAGE);
@@ -20,22 +25,26 @@ export default function ProductList() {
       });
   }, [sortState]);
 
+  //메인카테고리 이름과 서브카테고리 이름 받아오는 fetch.
   useEffect(() => {
-    fetch(`http://10.58.1.56:8000/products/main_category/${1}`)
+    fetch(`http://3.37.182.60:8000/products/main_category/${params.listid}`)
       .then(res => res.json())
       .then(res => setSubCategory(res.sub_category_list));
   }, []);
 
   const handleBtns = e => {
     let word = e.target.value;
+    console.log(3333, products.sub_category_name);
     console.log(11111, word);
-    console.log(333, allProducts);
+    console.log(22222, allProducts);
     const filteredData = allProducts.filter(
       item => item.sub_category_name === word
     );
-    console.log(2222, filteredData);
+    console.log(33333, filteredData);
     setProducts(filteredData);
   };
+
+  console.log('a' + products.length);
 
   return (
     <Container>
@@ -68,12 +77,16 @@ export default function ProductList() {
       </ButtonWrapperStyles>
       <MainCategoryName>{/* <h2>인기 실내 다이빙</h2> */}</MainCategoryName>
       <CardCompSection>
-        <ProductListCard
-          product={products}
-          setProducts={setProducts}
-          sort={sortState}
-          setSortState={setSortState}
-        />
+        {products.length === 31 ? (
+          <div>검색결과가 없습니다.</div>
+        ) : (
+          <ProductListCard
+            product={products}
+            setProducts={setProducts}
+            sort={sortState}
+            setSortState={setSortState}
+          />
+        )}
       </CardCompSection>
     </Container>
   );
