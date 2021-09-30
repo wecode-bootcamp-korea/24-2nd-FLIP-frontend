@@ -15,14 +15,6 @@ function ProductCard({ sort }) {
       });
   }, [sort]);
 
-  useEffect(() => {
-    fetch(`http://10.58.1.56:8000/products/list/1?order=${sort}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.MESSAGE);
-      });
-  }, []);
-
   return (
     <Container>
       {cards.map((card, idx) => {

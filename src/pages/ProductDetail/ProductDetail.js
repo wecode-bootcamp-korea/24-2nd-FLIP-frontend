@@ -15,15 +15,15 @@ const ProductDetail = () => {
   const [location, setLocation] = useState({});
 
   useEffect(() => {
-    fetch(`http://10.58.7.68:8000/product/${params.id}`)
+    fetch(`http://10.58.7.68:8000/product/1`)
       .then(result => result.json())
       .then(product => setProduct(product.result));
 
-    fetch(`http://10.58.7.68:8000/product/${params.id}/review`)
+    fetch(`http://10.58.7.68:8000/product/1/review`)
       .then(result => result.json())
       .then(data => setReview(data.result));
 
-    fetch(`http://10.58.7.68:8000/product/${params.id}/location`)
+    fetch(`http://10.58.7.68:8000/product/1/location`)
       .then(result => result.json())
       .then(location => setLocation(location.result));
   }, []);

@@ -67,9 +67,7 @@ function Nav() {
         <MainNav>
           <Category
             onClick={clickHandler}
-            onMouseLeave={() => {
-              setIsFold(false);
-            }}
+            onMouseLeave={() => setIsFold(false)}
           >
             <FaBars />
             <span>카테고리</span>
@@ -142,7 +140,7 @@ function Nav() {
             <EmailInput
               onChange={accountInfo}
               placeholder="계좌번호를 입력해주세요"
-            ></EmailInput>
+            />
             <button onClick={applyHost}>호스트 지원</button>
           </ModalWrapper>
         </HostModal>
@@ -205,7 +203,7 @@ const SearchBarWrapper = styled.div`
   padding: 0.5em;
 `;
 
-const Category = styled.a`
+const Category = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;

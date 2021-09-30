@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import Card from '../../components/Card/Card';
+import MainCard from './MainCard/MainCard';
 import CategoryList from './CategoryList/CategoryList';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { API } from '../../config';
 
 function Main() {
   var settings = {
@@ -28,31 +29,30 @@ function Main() {
   const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
-    fetch('./data/categoryIcons.json')
+    fetch(`${API}/products/main_page_category`)
       .then(res => res.json())
-      .then(data => setCategoryData(data.main_category_info));
+      .then(data => setCategoryData(data.main_category_info.slice(0, 9)));
   }, []);
 
   return (
     <Content>
       <Banner>
         <Slider {...settings}>
-          {bannerArr.map(item => {
-            return <img src={item.src} alt="배너" />;
+          {bannerArr.map((item, idx) => {
+            return <img key={idx} src={item.src} alt="배너" />;
           })}
         </Slider>
       </Banner>
       <CategoryIconList>
-        {categoryData &&
-          categoryData.map((item, idx) => (
-            <CategoryList key={idx} categoryInfo={item} />
-          ))}
+        {categoryData?.map((item, idx) => (
+          <CategoryList key={idx} categoryInfo={item} />
+        ))}
       </CategoryIconList>
       <CardHeader>
         <span className="bigHeader">주간베스트</span>
         <span>전체보기</span>
       </CardHeader>
-      <Card></Card>
+      <MainCard />
     </Content>
   );
 }

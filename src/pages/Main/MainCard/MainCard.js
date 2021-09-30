@@ -1,13 +1,13 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import CardList from './CardList';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import MainCardList from './MainCardList';
+import { API } from '../../../config';
 
-function Card() {
+function MainCard() {
   const [cards, setCard] = useState([]);
 
   useEffect(() => {
-    fetch('http://10.58.7.68:8000/products/list/1')
+    fetch(`${API}/products/list/1`)
       .then(res => res.json())
       .then(res => setCard(res.MESSAGE));
   }, []);
@@ -15,7 +15,7 @@ function Card() {
   return (
     <Container>
       {cards.map((card, idx) => {
-        return <CardList key={idx} card={card} />;
+        return <MainCardList key={idx} card={card} />;
       })}
     </Container>
   );
@@ -27,4 +27,4 @@ const Container = styled.div`
   width: 800px;
 `;
 
-export default Card;
+export default MainCard;
