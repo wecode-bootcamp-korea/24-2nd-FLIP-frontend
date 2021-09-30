@@ -7,7 +7,7 @@ function Card() {
   const [cards, setCard] = useState([]);
 
   useEffect(() => {
-    fetch('http://10.58.1.56:8000/products/list/1')
+    fetch('http://10.58.7.68:8000/products/list/1')
       .then(res => res.json())
       .then(res => setCard(res.MESSAGE));
   }, []);
