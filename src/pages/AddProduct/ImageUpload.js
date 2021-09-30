@@ -6,15 +6,14 @@ const ImageUpload = () => {
 
   const handleFileChange = e => {
     e.preventDefault();
-
-    setSelectedFile(e.target.files[0]);
+    setSelectedFile(e.target.files);
   };
 
   const handleFileUpload = () => {
     const formData = new FormData();
 
     for (let i = 0; i < selectedFile.length; i++) {
-      formData.append('file', selectedFile[i]);
+      formData.append('image_url', selectedFile[i]);
     }
 
     // fetch('http://10.58.7.108:8080/product/2/host/1/image_upload', {
@@ -28,11 +27,7 @@ const ImageUpload = () => {
     //   .then(res => console.log(res));
 
     axios
-      .post(
-        'http://10.58.7.108:8080/product/2/host/1/image_upload',
-        formData
-        // config
-      )
+      .post('http://10.58.7.108:8080/product/2/host/1/image_upload', formData)
       .then(res => {
         console.log(res);
       })
