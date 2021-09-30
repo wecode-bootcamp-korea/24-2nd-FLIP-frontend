@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ProductStarImg from './ProductStarImg';
-import ProductExplanation from './ProductExplanation';
+import MainStarImg from './MainStarImg';
+import MainExplanation from './MainExplanation';
 
-export default function ProductCardList({ card, moveToDetail, id }) {
+export default function MainCardList({ card, moveToDetail, id }) {
   const [bookMark, setBookmark] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ export default function ProductCardList({ card, moveToDetail, id }) {
         <ProductImg onClick={() => moveToDetail(id)} src={card.image_url} />
       </ImgContainer>
 
-      <ProductExplanation></ProductExplanation>
+      <MainExplanation />
 
       <Desc>
         <span>{card.title}</span>
@@ -28,7 +28,7 @@ export default function ProductCardList({ card, moveToDetail, id }) {
       </Price>
 
       <RatingSection>
-        <ProductStarImg alt="rating-star" />
+        <MainStarImg alt="rating-star" />
         <span>{card.rating}</span>
       </RatingSection>
     </Wrapper>

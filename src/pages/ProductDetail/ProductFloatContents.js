@@ -7,7 +7,7 @@ const ProductFloatContents = ({ product }) => {
       <Floatbox>
         <FloatSave>
           {product && product.is_like ? (
-            <i class="fas fa-bookmark" />
+            <i className="fas fa-bookmark" />
           ) : (
             <i className="far fa-bookmark" />
           )}

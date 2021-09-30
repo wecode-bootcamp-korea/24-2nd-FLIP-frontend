@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
+import { API } from '../../config';
 
 function Nav() {
   const [isFold, setIsFold] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [bank_name, setBank] = useState('');
   const [account_number, setAccount] = useState('');
+  const navList = [
+    '아웃도어',
+    '피트니스',
+    '공예DIY',
+    '스포츠',
+    '베이킹',
+    '쿠킹',
+    '문화예술',
+    '모임',
+    '자기계발',
+  ];
 
   const clickHandler = () => {
     setIsFold(!isFold);
+    console.log('clicked');
   };
 
   const clickHostApply = () => {
@@ -25,10 +39,11 @@ function Nav() {
   };
 
   const applyHost = e => {
-    fetch('http://10.58.5.187:8000/users/bank_account/1', {
+    fetch(`${API}/users/bank_account`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('kakao-token'),
       },
       body: JSON.stringify({
         account_holder: 'jun',
@@ -38,6 +53,30 @@ function Nav() {
     }).then(response => response.json());
 
     setIsModal(!isModal);
+  };
+
+  const history = useHistory();
+  const { Kakao } = window;
+
+  const kakaoLoginClick = () => {
+    Kakao.Auth.login({
+      success: function (success) {
+        fetch(`${API}/users/signin?access_token=`, {
+          method: 'POST',
+          body: JSON.stringify({
+            access_token: success.access_token,
+          }),
+        })
+          .then(res => res.json())
+          .then(res => {
+            localStorage.setItem('kakao-token', res.TOKEN);
+            if (res.TOKEN) {
+              alert('Flip에 오신걸 환엽합니다!');
+              history.push('/');
+            }
+          });
+      },
+    });
   };
 
   return (
@@ -52,10 +91,10 @@ function Nav() {
               <MenuItem>회원가입</MenuItem>
             </UserMenu>
             <UserMenu>
-              <MenuItem>로그인</MenuItem>
+              <MenuItem onClick={kakaoLoginClick}>로그인</MenuItem>
             </UserMenu>
             <UserMenu>
-              <MenuItem>자주 묻는 </MenuItem>질문
+              <MenuItem>자주 묻는 질문</MenuItem>
             </UserMenu>
             <UserMenu>
               <MenuItem>공지사항</MenuItem>
@@ -63,13 +102,12 @@ function Nav() {
           </UserMenus>
         </SubNav>
       </SubNavWrapper>
+
       <Navbar>
         <MainNav>
           <Category
             onClick={clickHandler}
-            onMouseLeave={() => {
-              setIsFold(false);
-            }}
+            onMouseLeave={() => setIsFold(false)}
           >
             <FaBars />
             <span>카테고리</span>
@@ -79,74 +117,99 @@ function Nav() {
                 setIsFold(false);
               }}
             >
-              <li>
-                <a href="/">서핑</a>
+              {navList.map((a, idx) => {
+                return (
+                  <li onClick={() => history.push(`product-list/${idx + 1}`)}>
+                    <span>{a}</span>
+                  </li>
+                );
+              })}
+
+              {/* <li onClick={() => history.push(`product-list/1`)}>
+                <span>아웃도어</span>
               </li>
-              <li>
-                <a href="/">축구</a>
+              <li onClick={() => history.push(`product-list/2`)}>
+                <span>피트니스</span>
               </li>
-              <li>
-                <a href="/">공예DIY</a>
+              <li onClick={() => history.push(`product-list/3`)}>
+                <span>공예DIY</span>
               </li>
-              <li>
-                <a href="/">스노우보드</a>
+              <li onClick={() => history.push(`product-list/4`)}>
+                <span>스포츠</span>
               </li>
-              <li>
-                <a href="/">서핑</a>
+              <li onClick={() => history.push(`product-list/5`)}>
+                <span>베이킹</span>
               </li>
+              <li onClick={() => history.push(`product-list/6`)}>
+                <span>쿠킹</span>
+              </li>
+              <li onClick={() => history.push(`product-list/7`)}>
+                <span>문화예술</span>
+              </li>
+              <li onClick={() => history.push(`product-list/8`)}>
+                <span>모임</span>
+              </li>
+              <li onClick={() => history.push(`product-list/9`)}>
+                <span>자기계발</span>
+              </li> */}
             </InnerCategory>
           </Category>
           <SearchBarWrapper>
             <Line />
-            <Logo src="/image/logo.png" />
+            <Link to="/">
+              <Logo src="/image/logo.png" />
+            </Link>
             <InputWrapper>
               <i className="fas fa-search" />
               <SearchBar placeholder="검색어를 입력해주세요" />
             </InputWrapper>
 
             <NavBtn>
-              <i className="far fa-plus-square" />
+              <i
+                className="far fa-plus-square"
+                onClick={() => history.push(`/add-product`)}
+              />
             </NavBtn>
             <NavBtn>
               <i className="far fa-user-circle" />
             </NavBtn>
           </SearchBarWrapper>
         </MainNav>
-
-        <HostModal isModal={isModal}>
-          <ModalWrapper>
-            <img src="/image/logo.png" alt="logo" />
-            <SelectBank onChange={selectBank}>
-              <option value="">은행 선택</option>
-              <optgroup label="은행">
-                <option value="국민은행">국민은행</option>
-                <option value="우리은행">우리은행</option>
-                <option value="신한은행">신한은행</option>
-                <option value="농협은행">농협은행</option>
-                <option value="기업은행">기업은행</option>
-                <option value="광주은행">광주은행</option>
-                <option value="BNK은행">BNK은행</option>
-                <option value="전북은행">전북은행</option>
-              </optgroup>
-              <optgroup label="증권">
-                <option value="KB증권">KB증권</option>
-                <option value="현대차증권">현대차증권</option>
-                <option value="미래에셋대우">미래에셋대우</option>
-                <option value="키움증권">키움증권</option>
-                <option value="상상인증권">상상인증권</option>
-                <option value="NH증권">NH증권</option>
-                <option value="삼성증권">삼성증권</option>
-                <option value="대신증권">대신증권</option>
-              </optgroup>
-            </SelectBank>
-            <EmailInput
-              onChange={accountInfo}
-              placeholder="계좌번호를 입력해주세요"
-            ></EmailInput>
-            <button onClick={applyHost}>호스트 지원</button>
-          </ModalWrapper>
-        </HostModal>
       </Navbar>
+
+      <HostModal isModal={isModal}>
+        <ModalWrapper>
+          <img src="/image/logo.png" alt="logo" />
+          <SelectBank onChange={selectBank}>
+            <option value="">은행 선택</option>
+            <optgroup label="은행">
+              <option value="국민은행">국민은행</option>
+              <option value="우리은행">우리은행</option>
+              <option value="신한은행">신한은행</option>
+              <option value="농협은행">농협은행</option>
+              <option value="기업은행">기업은행</option>
+              <option value="광주은행">광주은행</option>
+              <option value="BNK은행">BNK은행</option>
+              <option value="전북은행">전북은행</option>
+            </optgroup>
+            <optgroup label="증권">
+              <option value="KB증권">KB증권</option>
+              <option value="현대차증권">현대차증권</option>
+              <option value="미래에셋대우">미래에셋대우</option>
+              <option value="키움증권">키움증권</option>
+              <option value="상상인증권">상상인증권</option>
+              <option value="NH증권">NH증권</option>
+              <option value="삼성증권">삼성증권</option>
+              <option value="대신증권">대신증권</option>
+            </optgroup>
+          </SelectBank>
+          <EmailInput
+            onChange={accountInfo}
+            placeholder="계좌번호를 입력해주세요"
+          />
+          <button onClick={applyHost}>호스트 지원</button>
+        </ModalWrapper>
+      </HostModal>
     </>
   );
 }
@@ -187,14 +250,16 @@ const UserMenus = styled.ul`
 
 const UserMenu = styled.li`
   padding: 0 0.5em;
+  background-color: white;
 `;
 
-const MenuItem = styled.a`
+const MenuItem = styled.div`
   cursor: pointer;
 `;
 
 const MainNav = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 100%;
   max-width: 768px;
 `;
@@ -203,9 +268,10 @@ const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 0.5em;
+  width: 100%;
 `;
 
-const Category = styled.a`
+const Category = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -234,9 +300,12 @@ const InnerCategory = styled.ul`
   display: ${props => (props.isFold === true ? 'block' : 'none')};
   position: absolute;
   top: 60px;
+  left: 5px;
   border: 1px solid whitesmoke;
   white-space: nowrap;
+  width: 120px;
   background-color: white;
+  z-index: 1000;
 
   li {
     font-size: 0.8rem;
@@ -304,10 +373,13 @@ const HostModal = styled.div`
   width: 50vh;
   height: 50vh;
   top: 25%;
+  left: 50%;
   background-color: white;
   border: 1px solid ${props => props.theme.grey};
   border-radius: 50px;
   text-align: center;
+  z-index: 1000000;
+  transform: translate(-50%, 0);
 
   img {
     width: 60px;
