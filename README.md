@@ -4,7 +4,7 @@
 
 # FLIP | 플립
 
-<img src='./flip_log.png' alt='logo'>
+<img src='https://github.com/wecode-bootcamp-korea/24-2nd-FLIP-backend/blob/main/flip_log.png?raw=true' alt='logo'>
 
 <br><br>
 
